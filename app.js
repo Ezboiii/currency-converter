@@ -25,12 +25,13 @@ toCurrencySelect.innerHTML = fromCurrencySelect.innerHTML;
     const fromCurrency = fromCurrencySelect.value;
     const toCurrency = toCurrencySelect.value;
     const amount = input.value;
-
-    fetch(`${host}/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`)
+  
+    fetch(`${host}/latest?amount=1&from=${fromCurrency}&to=${toCurrency}`)
       .then((val) => val.json())
       .then((val) => {
-        const convertedAmount = Object.values(val.rates)[0];
-        output.value = (convertedAmount * amount).toFixed(2); // Round to 2 decimal places
+        const conversionRate = Object.values(val.rates)[0];
+        const convertedAmount = (conversionRate * amount).toFixed(2); // Round to 2 decimal places
+        output.value = convertedAmount;
       });
   });
-});
+})  
